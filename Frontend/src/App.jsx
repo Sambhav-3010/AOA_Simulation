@@ -31,9 +31,7 @@ export default function App() {
         <h1 className="text-5xl font-extrabold text-center text-indigo-700 mb-10 drop-shadow-md">
           Job Scheduling Visualizer
         </h1>
-
         <InputForm onSchedule={handleSchedule} />
-
         {started && (
           <div className="flex justify-center mt-8">
             <button

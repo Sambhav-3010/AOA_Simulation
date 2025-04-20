@@ -4,8 +4,6 @@ export default function JobVisualizer({ step, stepIndex, totalSlots }) {
       <h2 className="text-2xl font-semibold mb-6 text-indigo-800 text-center">
         Step {stepIndex + 1}: {step?.message}
       </h2>
-
-      {/* Floating Current Job Card */}
       {step.currentJob && (
         <div className="flex justify-center mb-6">
           <div
@@ -19,8 +17,6 @@ export default function JobVisualizer({ step, stepIndex, totalSlots }) {
           </div>
         </div>
       )}
-
-      {/* Header row */}
       <div className="flex justify-center gap-4 mb-2 flex-wrap">
         {step.slots.map((_, index) => (
           <div key={index} className="w-32 text-center">
@@ -28,8 +24,6 @@ export default function JobVisualizer({ step, stepIndex, totalSlots }) {
           </div>
         ))}
       </div>
-
-      {/* Job slots */}
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
         {step.slots.map((job, index) => (
           <div
