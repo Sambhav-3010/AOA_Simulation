@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function InputForm({ onSchedule }) {
   const [jobs, setJobs] = useState([{ id: "A", profit: 100, deadline: 2 }]);
-  const [slots, setSlots] = useState(3);
+  const [slots, setSlots] = useState(2);
 
   const handleChange = (index, field, value) => {
     const updated = [...jobs];
@@ -11,7 +11,12 @@ export default function InputForm({ onSchedule }) {
   };
 
   const addJob = () => {
-    setJobs([...jobs, { id: "", profit: 0, deadline: 0 }]);
+    setJobs([...jobs, { id: "", profit: null, deadline: null }]);
+  };
+
+  const removeJob = (index) => {
+    const updated = jobs.filter((_, i) => i !== index);
+    setJobs(updated);
   };
 
   const handleSubmit = (e) => {
@@ -20,10 +25,18 @@ export default function InputForm({ onSchedule }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid gap-4">
+    <form onSubmit={handleSubmit} className="space-y-3">
+      {/* Headers */}
+      <div className="grid grid-cols-3 gap-4 w-[70vw] max-w-md mx-auto text-center font-semibold text-gray-700">
+        <p>Job ID</p>
+        <p>Profit</p>
+        <p>Deadline</p>
+      </div>
+
+      {/* Inputs */}
+      <div className="grid gap-x-10 gap-y-4">
         {jobs.map((job, index) => (
-          <div key={index} className="flex gap-4 items-center">
+          <div key={index} className="flex gap-x-12 items-center justify-center">
             <input
               type="text"
               placeholder="Job ID"
@@ -48,11 +61,19 @@ export default function InputForm({ onSchedule }) {
               onChange={(e) => handleChange(index, "deadline", e.target.value)}
               required
             />
+            <button
+              type="button"
+              onClick={() => removeJob(index)}
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            >
+              Remove
+            </button>
           </div>
         ))}
       </div>
 
-      <div className="flex gap-4 items-center">
+      {/* Buttons and Slots */}
+      <div className="flex gap-4 items-center justify-center">
         <button
           type="button"
           onClick={addJob}
